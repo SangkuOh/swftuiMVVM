@@ -12,14 +12,14 @@ import SwiftUI
 
 public struct RootView: View {
   @StateObject var navigationVM: NavigationVM
-  @StateObject var rootVM: ViewModel
+  @StateObject var viewModel: ViewModel
   
   public init(
     navigationVM: NavigationVM = .init(),
-    rootVM: ViewModel = .init()
+    viewModel: ViewModel = .init()
   ) {
     _navigationVM = StateObject(wrappedValue: navigationVM)
-    _rootVM = StateObject(wrappedValue: rootVM)
+    _viewModel = StateObject(wrappedValue: viewModel)
   }
   
   public var body: some View {
@@ -43,7 +43,11 @@ public struct RootView: View {
 struct RootView_Previews: PreviewProvider {
   static var previews: some View {
     RootView
-      .init(rootVM: .init(wordService: WordServiceMock()))
+      .init(
+        viewModel: .init(
+          wordService: WordServiceMock
+            .init(similarToEntityResult: .success(.init()))
+        )
+      )
   }
 }
-  
