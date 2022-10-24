@@ -16,18 +16,18 @@ public extension RootView {
     @Published var isUser: Bool = false
     @Published var isUserDetail: Bool = false
     
-    let wordService: WordService
+    let WordRepository: WordRepository
     
     public init(
-      wordService: WordService = WordServiceLive.shared
+      WordRepository: WordRepository = WordRepositoryLive.shared
     ) {
-      self.wordService = wordService
+      self.WordRepository = WordRepository
     }
     
     // MARK: APIs
     @MainActor
     func getSimilarTo() async -> Result<SimilarToEntity, RequestError> {
-      await wordService.getSimilarTo(word: "")
+      await WordRepository.getSimilarTo(word: "")
     }
   }
 }

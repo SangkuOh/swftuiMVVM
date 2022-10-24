@@ -9,7 +9,7 @@ import SwiftUI
 import Navigation
 
 public struct MainView: View {
-  @EnvironmentObject var navigationVM: NavigationVM
+  @EnvironmentObject var NavigationViewModel: NavigationViewModel
   @StateObject var viewModel: ViewModel
   @State var isLoading: Bool
   @State var isAlert: Bool
@@ -28,10 +28,10 @@ public struct MainView: View {
       NavigationView {
         NavigationLink
           .init(
-            isActive: $navigationVM.isMainDetail,
+            isActive: $NavigationViewModel.isMainDetail,
             destination: {
               Button {
-                navigationVM.tappedMainDetailButton()
+                NavigationViewModel.tappedMainDetailButton()
               } label: {
                 Text("디테일 페이지입니다.")
               }

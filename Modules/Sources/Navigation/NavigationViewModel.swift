@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public class NavigationVM: ObservableObject {
+public class NavigationViewModel: ObservableObject {
   @Published public var tap: Tap
   @Published public var isMainDetail: Bool
   @Published public var isUserDetail: Bool
@@ -24,28 +24,32 @@ public class NavigationVM: ObservableObject {
 }
 
 // MARK: Clear All NavigationStack
-public extension NavigationVM {
+public extension NavigationViewModel {
   func clearStacks() {
     isMainDetail = false
     isUserDetail = false
   }
 }
 
-public extension NavigationVM {
+public extension NavigationViewModel {
   func tappedMainDetailButton() {
     clearStacks()
-    tap = .user
-    isUserDetail = true
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      self.tap = .user
+      self.isUserDetail = true
+    }
   }
   
   func tappedUserDetailButton() {
     clearStacks()
-    tap = .main
-    isMainDetail = true
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      self.tap = .main
+      self.isMainDetail = true
+    }
   }
 }
 
 public enum Tap {
-    case user
-    case main
-  }
+  case user
+  case main
+}

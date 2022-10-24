@@ -7,12 +7,12 @@
 
 import Common
 
-public protocol WordService {
+public protocol WordRepository {
   func getSimilarTo(word: String) async -> Result<SimilarToEntity, RequestError>
 }
 
-public struct WordServiceLive: HTTPClient, WordService {
-  public static let shared: WordService = WordServiceLive()
+public struct WordRepositoryLive: HTTPClient, WordRepository {
+  public static let shared: WordRepository = WordRepositoryLive()
   
   public func getSimilarTo(word: String) async -> Result<SimilarToEntity, RequestError> {
     let response = await sendRequest(
@@ -30,7 +30,7 @@ public struct WordServiceLive: HTTPClient, WordService {
   }
 }
 
-public struct WordServiceMock: WordService {
+public struct WordRepositoryMock: WordRepository {
   let similarToEntityResult: Result<SimilarToEntity, RequestError>
   
   public init(

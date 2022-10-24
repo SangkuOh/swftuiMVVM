@@ -9,7 +9,7 @@ import SwiftUI
 import Navigation
 
 public struct UserView: View {
-  @EnvironmentObject var navigationVM: NavigationVM
+  @EnvironmentObject var NavigationViewModel: NavigationViewModel
   @StateObject var viewModel: ViewModel = .init()
   @State var isLoading: Bool
   @State var isAlert: Bool
@@ -26,10 +26,10 @@ public struct UserView: View {
     NavigationView {
         NavigationLink
         .init(
-          isActive: $navigationVM.isUserDetail,
+          isActive: $NavigationViewModel.isUserDetail,
           destination: {
             Button {
-              navigationVM.tappedUserDetailButton()
+              NavigationViewModel.tappedUserDetailButton()
             } label: {
               Text("유저 디테일 입니다.")
             }
